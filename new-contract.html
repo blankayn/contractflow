@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Contract | ContractFlow</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="bg-canvas">
+        <iframe class="spline-iframe" src="https://my.spline.design/copy-r7EDDtjbL0PECKddyI3Adsd2/" frameborder="0" title="Spline Background"></iframe>
+    </div>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="ContractFlow Logo">
+                <span>ContractFlow</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="new-contract.html" class="active"><i class="fa-solid fa-file-signature"></i> New Contract</a></li>
+                    <li><a href="dashboard.html"><i class="fa-solid fa-table-columns"></i> Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="form-container">
+            <div style="margin-bottom: 2rem; border-bottom: 1px solid rgba(0, 217, 255, 0.2); padding-bottom: 1.5rem;">
+                <h1 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: #ffffff;">Create New Contract</h1>
+                <p style="color: var(--text-muted); font-size: 0.9375rem;">Fill in the details below to generate your legal document.</p>
+            </div>
+
+            <form id="contractForm">
+                <div class="form-group">
+                    <label for="fullName">Recipient Full Name <span>*</span></label>
+                    <input type="text" id="fullName" class="form-control" placeholder="e.g. John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Recipient Email (Gmail) <span>*</span></label>
+                    <input type="email" id="email" class="form-control" placeholder="e.g. john@gmail.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contractDetails">Contract Details <span>*</span></label>
+                    <textarea id="contractDetails" class="form-control" placeholder="Enter the contract details, terms, or additional information..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Attachments</label>
+                    <div class="upload-area" id="dropZone">
+                        <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                        <p style="font-weight: 600; margin-bottom: 0.25rem;">Drop files here or click to upload</p>
+                        <p style="color: var(--text-muted); font-size: 0.8125rem;">Images, PDFs, and documents up to 10MB · Max 10 files</p>
+                        <input type="file" id="fileInput" multiple style="display: none;">
+                    </div>
+                    <div id="fileList" style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);"></div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="button" class="btn btn-secondary" id="previewBtn" style="flex: 1;">
+                        <i class="fa-solid fa-file-lines"></i> Preview Contract
+                    </button>
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">
+                        <i class="fa-solid fa-paper-plane"></i> Send Contract
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+        <!-- Preview Modal -->
+    <div class="modal-overlay" id="previewModal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 800; color: #ffffff;">Contract Preview</h2>
+            <div class="preview-document" id="previewContent">
+                <!-- Content injected by JS -->
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                <button class="btn btn-secondary" id="closeModal">Close Preview</button>
+                <button class="btn btn-primary" id="confirmSend">Confirm and Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
