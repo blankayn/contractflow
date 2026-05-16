@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Contract | ContractFlow</title>
+    <title>Loan Application | ContractFlow</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +23,8 @@
             <nav>
                 <ul>
                     <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li><a href="new-contract.html" class="active"><i class="fa-solid fa-file-signature"></i> New Contract</a></li>
-                    <li><a href="dashboard.html"><i class="fa-solid fa-table-columns"></i> Dashboard</a></li>
+                    <li><a href="new-contract.html" class="active"><i class="fa-solid fa-file-signature"></i> Apply Loan</a></li>
+                    <li><a href="dashboard.html"><i class="fa-solid fa-table-columns"></i> Lender Dashboard</a></li>
                 </ul>
             </nav>
         </div>
@@ -32,44 +32,132 @@
 
     <main class="container">
         <div class="form-container">
-            <div style="margin-bottom: 2rem; border-bottom: 1px solid rgba(0, 217, 255, 0.2); padding-bottom: 1.5rem;">
-                <h1 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: #ffffff;">Create New Contract</h1>
-                <p style="color: var(--text-muted); font-size: 0.9375rem;">Fill in the details below to generate your legal document.</p>
+            <div class="form-header">
+                <h1 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: #ffffff;">Loan Application Form</h1>
+                <p style="color: var(--text-muted); font-size: 0.9375rem;">Provide complete personal and financial details for lender review.</p>
+                <p id="draftStatus" class="draft-status"></p>
             </div>
 
-            <form id="contractForm">
-                <div class="form-group">
-                    <label for="fullName">Recipient Full Name <span>*</span></label>
-                    <input type="text" id="fullName" class="form-control" placeholder="e.g. John Doe" required>
+            <form id="loanApplicationForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Borrower Full Name <span>*</span></label>
+                        <input type="text" id="fullName" class="form-control" placeholder="e.g. John Doe" required>
+                        <p id="fullNameError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Gmail Address <span>*</span></label>
+                        <input type="email" id="email" class="form-control" placeholder="e.g. john@gmail.com" required>
+                        <p id="emailError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Contact Number <span>*</span></label>
+                        <input type="tel" id="phone" class="form-control" placeholder="e.g. +63 912 345 6789" required>
+                        <p id="phoneError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="idType">Valid ID Type <span>*</span></label>
+                        <select id="idType" class="form-control" required>
+                            <option value="">Select ID type</option>
+                            <option value="passport">Passport</option>
+                            <option value="national-id">National ID</option>
+                            <option value="drivers-license">Driver's License</option>
+                            <option value="voter-id">Voter ID</option>
+                        </select>
+                        <p id="idTypeError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="idNumber">Valid ID Number <span>*</span></label>
+                        <input type="text" id="idNumber" class="form-control" placeholder="Enter your ID number" required>
+                        <p id="idNumberError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employmentStatus">Employment Status <span>*</span></label>
+                        <select id="employmentStatus" class="form-control" required>
+                            <option value="">Select status</option>
+                            <option value="employed">Employed</option>
+                            <option value="self-employed">Self-employed</option>
+                            <option value="freelancer">Freelancer</option>
+                            <option value="business-owner">Business Owner</option>
+                        </select>
+                        <p id="employmentStatusError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="monthlyIncome">Monthly Income (USD) <span>*</span></label>
+                        <input type="number" id="monthlyIncome" class="form-control" min="0" step="0.01" placeholder="e.g. 2500" required>
+                        <p id="monthlyIncomeError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loanAmount">Loan Amount (USD) <span>*</span></label>
+                        <input type="number" id="loanAmount" class="form-control" min="100" step="0.01" placeholder="e.g. 5000" required>
+                        <p id="loanAmountError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interestRate">Interest Rate % (annual) <span>*</span></label>
+                        <input type="number" id="interestRate" class="form-control" min="0" max="100" step="0.01" placeholder="e.g. 12" required>
+                        <p id="interestRateError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="repaymentMonths">Repayment Term (months) <span>*</span></label>
+                        <select id="repaymentMonths" class="form-control" required>
+                            <option value="">Select term</option>
+                            <option value="3">3 months</option>
+                            <option value="6">6 months</option>
+                            <option value="12">12 months</option>
+                            <option value="18">18 months</option>
+                            <option value="24">24 months</option>
+                            <option value="36">36 months</option>
+                        </select>
+                        <p id="repaymentMonthsError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="address">Complete Address <span>*</span></label>
+                        <textarea id="address" class="form-control" placeholder="Street, city, state/province, zip code" required></textarea>
+                        <p id="addressError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="loanPurpose">Loan Purpose <span>*</span></label>
+                        <textarea id="loanPurpose" class="form-control" placeholder="Explain how you plan to use the loan..." required></textarea>
+                        <p id="loanPurposeError" class="error-text"></p>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="termsAccepted" class="checkbox-label">
+                            <input type="checkbox" id="termsAccepted">
+                            I confirm all provided information is accurate and agree to lending terms.
+                        </label>
+                        <p id="termsAcceptedError" class="error-text"></p>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Recipient Email (Gmail) <span>*</span></label>
-                    <input type="email" id="email" class="form-control" placeholder="e.g. john@gmail.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="contractDetails">Contract Details <span>*</span></label>
-                    <textarea id="contractDetails" class="form-control" placeholder="Enter the contract details, terms, or additional information..." required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Attachments</label>
+                    <label>Upload Valid ID / Supporting Documents</label>
                     <div class="upload-area" id="dropZone">
                         <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
                         <p style="font-weight: 600; margin-bottom: 0.25rem;">Drop files here or click to upload</p>
                         <p style="color: var(--text-muted); font-size: 0.8125rem;">Images, PDFs, and documents up to 10MB · Max 10 files</p>
                         <input type="file" id="fileInput" multiple style="display: none;">
                     </div>
-                    <div id="fileList" style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);"></div>
+                    <div id="fileList" class="upload-file-list"></div>
                 </div>
 
-                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <div class="form-actions">
                     <button type="button" class="btn btn-secondary" id="previewBtn" style="flex: 1;">
-                        <i class="fa-solid fa-file-lines"></i> Preview Contract
+                        <i class="fa-solid fa-file-lines"></i> Preview Application
                     </button>
                     <button type="submit" class="btn btn-primary" style="flex: 1;">
-                        <i class="fa-solid fa-paper-plane"></i> Send Contract
+                        <i class="fa-solid fa-paper-plane"></i> Submit Loan Request
                     </button>
                 </div>
             </form>
@@ -79,13 +167,13 @@
         <!-- Preview Modal -->
     <div class="modal-overlay" id="previewModal">
         <div class="modal-content">
-            <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 800; color: #ffffff;">Contract Preview</h2>
+            <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 800; color: #ffffff;">Loan Application Preview</h2>
             <div class="preview-document" id="previewContent">
                 <!-- Content injected by JS -->
             </div>
-            <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+            <div class="modal-actions">
                 <button class="btn btn-secondary" id="closeModal">Close Preview</button>
-                <button class="btn btn-primary" id="confirmSend">Confirm and Send</button>
+                <button class="btn btn-primary" id="confirmSend">Confirm and Submit</button>
             </div>
         </div>
     </div>
