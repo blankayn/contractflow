@@ -801,6 +801,74 @@ tr:last-child td {
     color: var(--text-main);
 }
 
+/* Terms and Conditions */
+.terms-box {
+    border: 2px solid rgba(0, 217, 255, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    background: rgba(0, 217, 255, 0.03);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.terms-content {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-main);
+    overflow-y: auto;
+    max-height: 400px;
+    padding-right: 1rem;
+}
+
+.terms-content p {
+    margin-bottom: 0.75rem;
+}
+
+.terms-content strong {
+    color: var(--accent-light);
+}
+
+.terms-content ul {
+    margin-left: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-muted);
+}
+
+.terms-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.signature-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signature-field {
+    border: 2px solid rgba(0, 217, 255, 0.4);
+    border-radius: var(--radius-md);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.5rem;
+    cursor: crosshair;
+}
+
+#signatureCanvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: calc(var(--radius-md) - 2px);
+    cursor: crosshair;
+}
+
+#signatureCanvas:hover {
+    background: rgba(0, 217, 255, 0.1);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .container {
@@ -927,6 +995,11 @@ tr:last-child td {
 
     .form-grid {
         grid-template-columns: 1fr;
+    }
+
+    .terms-box {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .form-actions {

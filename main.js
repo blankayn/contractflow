@@ -55,6 +55,11 @@ function initLoanApplicationForm() {
 
     let statusTimer;
     let selectedFiles = [];
+    let isDrawing = false;
+    let signatureCanvas = null;
+    let signatureContext = null;
+
+    initSignatureCanvas();
 
     dropZone.addEventListener('click', () => fileInput.click());
     dropZone.addEventListener('dragover', event => {
@@ -82,6 +87,81 @@ function initLoanApplicationForm() {
                 draftStatus.textContent = '';
             }, 2500);
         }
+    }
+
+    function initSignatureCanvas() {
+        signatureCanvas = document.getElementById('signatureCanvas');
+        if (!signatureCanvas) {
+            return;
+        }
+
+        signatureContext = signatureCanvas.getContext('2d');
+        const clearBtn = document.getElementById('clearSignature');
+        const dpr = window.devicePixelRatio || 1;
+        const rect = signatureCanvas.getBoundingClientRect();
+        signatureCanvas.width = rect.width * dpr;
+        signatureCanvas.height = rect.height * dpr;
+        signatureContext.scale(dpr, dpr);
+        signatureContext.lineCap = 'round';
+        signatureContext.lineJoin = 'round';
+        signatureContext.lineWidth = 2;
+        signatureContext.strokeStyle = '#00d9ff';
+
+        signatureCanvas.addEventListener('mousedown', startDrawing);
+        signatureCanvas.addEventListener('mousemove', draw);
+        signatureCanvas.addEventListener('mouseup', stopDrawing);
+        signatureCanvas.addEventListener('mouseleave', stopDrawing);
+
+        signatureCanvas.addEventListener('touchstart', handleTouch);
+        signatureCanvas.addEventListener('touchmove', handleTouch);
+        signatureCanvas.addEventListener('touchend', stopDrawing);
+
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+                signatureContext.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+                isDrawing = false;
+            });
+        }
+    }
+
+    function startDrawing(event) {
+        isDrawing = true;
+        const rect = signatureCanvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        signatureContext.beginPath();
+        signatureContext.moveTo(x, y);
+    }
+
+    function draw(event) {
+        if (!isDrawing) {
+            return;
+        }
+        const rect = signatureCanvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        signatureContext.lineTo(x, y);
+        signatureContext.stroke();
+    }
+
+    function stopDrawing() {
+        isDrawing = false;
+    }
+
+    function handleTouch(event) {
+        event.preventDefault();
+        const touch = event.touches[0];
+        if (!touch) {
+            return;
+        }
+        const mouseEvent = new MouseEvent(
+            event.type === 'touchstart' ? 'mousedown' : event.type === 'touchmove' ? 'mousemove' : 'mouseup',
+            {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            }
+        );
+        signatureCanvas.dispatchEvent(mouseEvent);
     }
 
     function handleFiles(files) {
@@ -522,9 +602,9 @@ window.rejectLoanRequest = function(id) {
 };
 
 function formatCurrency(amount) {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-PH', {
         style: 'currency',
-        currency: 'USD'
+        currency: 'PHP'
     }).format(Number(amount) || 0);
 }
 
