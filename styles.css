@@ -791,8 +791,6 @@ tr:last-child td {
     position: relative;
 }
 
-
-
 .preview-document {
     padding: 2rem;
     border: 1px solid rgba(0, 217, 255, 0.2);
@@ -801,81 +799,6 @@ tr:last-child td {
     margin-bottom: 2rem;
     border-radius: var(--radius-md);
     color: var(--text-main);
-}
-
-/* Terms and Conditions Box */
-.terms-box {
-    border: 2px solid rgba(0, 217, 255, 0.3);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    background: rgba(0, 217, 255, 0.03);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-top: 1rem;
-}
-
-.terms-content {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--text-main);
-    overflow-y: auto;
-    max-height: 400px;
-    padding-right: 1rem;
-}
-
-.terms-content p {
-    margin-bottom: 0.75rem;
-}
-
-.terms-content strong {
-    color: var(--accent-light);
-}
-
-.terms-content ul {
-    margin-left: 1.25rem;
-    margin-bottom: 0.75rem;
-    color: var(--text-muted);
-}
-
-.terms-content li {
-    margin-bottom: 0.5rem;
-    line-height: 1.5;
-}
-
-.signature-area {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.signature-field {
-    border: 2px solid rgba(0, 217, 255, 0.4);
-    border-radius: var(--radius-md);
-    background: rgba(0, 0, 0, 0.3);
-    padding: 0.5rem;
-    cursor: crosshair;
-}
-
-#signatureCanvas {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 150px;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: calc(var(--radius-md) - 2px);
-    cursor: crosshair;
-}
-
-#signatureCanvas:hover {
-    background: rgba(0, 217, 255, 0.1);
-}
-
-@media (max-width: 768px) {
-    .terms-box {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
 }
 
 /* Responsive */
@@ -1053,64 +976,4 @@ tr:last-child td {
 
     .modal-content {
         width: calc(100% - 1.5rem);
-        padding: 1.25rem;
-        max-height: 85vh;
-    }
-
-    .modal-actions {
-        flex-direction: column;
-    }
-
-    .modal-actions .btn {
-        width: 100%;
-    }
-
-    .action-btns {
-        min-width: 240px;
-    }
-
-    .cta-title {
-        font-size: 2rem;
-    }
-
-    .cta-copy {
-        font-size: 1rem;
-    }
-
-    .footer-content {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 0.875rem;
-    }
-
-    .section {
-        padding: 3rem 0;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .step-content h3 {
-        font-size: 1.45rem;
-    }
-
-    .upload-area {
-        padding: 2rem 1rem;
-    }
-
-    .logo {
-        font-size: 1.1rem;
-    }
-
-    nav a {
-        font-size: 0.85rem;
-        padding: 0.45rem 0.65rem;
-    }
-}
+    }],
